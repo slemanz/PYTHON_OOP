@@ -21,12 +21,18 @@ class Rectangle:
         self.upright = upright
 
 
-point1 = Point(1,1)
-point2 = Point(3,3)
+from random import randint
 
-print(point1.distance_from_point(point2))
+rectangle = Rectangle(
+    Point(randint(0,9), randint(0,9)),
+    Point(randint(10,19), randint(10,19))
+)
 
-rect = Rectangle(point1, point2)
+print("Rectangle coordinates: ",
+        rectangle.lowleft.x, ",",
+        rectangle.lowleft.y, "and",
+        rectangle.upright.x, ",",
+        rectangle.upright.y)
 
-point3 = Point(2,2)
-print(point3.falls_in_rectangle(rect))
+user_point = Point(float(input("Guess X: ")), float(input("Guess Y: ")))
+print("Your point was inside rectangle: ", user_point.falls_in_rectangle(rectangle))
