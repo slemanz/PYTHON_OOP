@@ -11,5 +11,11 @@ class Point:
         else:
             return False
 
-point1 = Point(6,8)
-print(point1.falls_in_rectangle((5,6), (7,9)))
+    def distance_from_point(self, point):
+        return ((self.x - point.x)**2 + (self.y - point.y)**2)**0.5
+
+point1 = Point(1,1)
+
+point2 = Point(3,3)
+
+print(point1.distance_from_point(point2))
