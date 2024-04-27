@@ -20,6 +20,9 @@ class Rectangle:
         self.lowleft = lowleft
         self.upright = upright
 
+    def area(self):
+        return (self.upright.x -self.lowleft.x) * (self.upright.y - self.lowleft.y)
+
 
 from random import randint
 
@@ -35,4 +38,9 @@ print("Rectangle coordinates: ",
         rectangle.upright.y)
 
 user_point = Point(float(input("Guess X: ")), float(input("Guess Y: ")))
+
+user_area = float(input("Guess rectangle area: "))
+
 print("Your point was inside rectangle: ", user_point.falls_in_rectangle(rectangle))
+
+print("Your area was:", rectangle.area())
