@@ -9,8 +9,8 @@ class Point:
         self.y = y
 
     def falls_in_rectangle(self, rectangle):
-        if rectangle.lowleft.x < self.x < rectangle.upright.x \
-                and rectangle.lowleft.y < self.y < rectangle.upright.y:
+        if (rectangle.point1.x < self.x < rectangle.point2.x and rectangle.point1.y < self.y < rectangle.point2.y) \
+            or (rectangle.point2.x < self.x < rectangle.point1.x and rectangle.point2.y < self.y < rectangle.point1.y):
             return True
         else:
             return False
@@ -45,37 +45,43 @@ class GuiRectangle(Rectangle):
         canvas.left(90)
         canvas.forward(self.point2.y - self.point1.y)
  
-        turtle.done()
-
-gui_rectangle = GuiRectangle(
-    Point(randint(0,400), randint(0,400)),
-    Point(randint(10,400), randint(10,400))
-)
-
-myturtle = turtle.Turtle()
-gui_rectangle.draw(canvas=myturtle)
 
 
+class GuiPoint(Point):
 
-'''
+    def draw(self, canvas, size=5, color='red'):
+        canvas.penup()
+        canvas.goto(self.x, self.y)
+        canvas.pendown()
+        canvas.dot(size, color)
+
+
+
+
+
 # create rectangle object
-rectangle = Rectangle(
+rectangle = GuiRectangle(
     Point(randint(0,400), randint(0,400)),
     Point(randint(10,400), randint(10,400))
 )
 
 # Print rectangle coordinates
 print("Rectangle coordinates: ",
-        rectangle.lowleft.x, ",",
-        rectangle.lowleft.y, "and",
-        rectangle.upright.x, ",",
-        rectangle.upright.y)
+        rectangle.point1.x, ",",
+        rectangle.point1.y, "and",
+        rectangle.point2.x, ",",
+        rectangle.point2.y)
 
 # get point and area from user
-user_point = Point(float(input("Guess X: ")), float(input("Guess Y: ")))
-user_area = float(input("Guess rectangle area: "))
+user_point = GuiPoint(float(input("Guess X: ")), float(input("Guess Y: ")))
+#user_area = float(input("Guess rectangle area: "))
 
 # Print out the game result
 print("Your point was inside rectangle: ", user_point.falls_in_rectangle(rectangle))
 print("Your area was:", rectangle.area())
-'''
+
+myturtle = turtle.Turtle()
+rectangle.draw(canvas=myturtle)
+user_point.draw(canvas=myturtle)
+turtle.done()
+
