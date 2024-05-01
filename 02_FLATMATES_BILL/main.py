@@ -1,3 +1,5 @@
+from fpdf import FPDF
+
 class Bill:
     '''
     Obejct that contains data about a bill, such as
@@ -45,3 +47,11 @@ marry = Flatmate(name="Marry", days_in_house=25)
 
 print("John pays: {:.2f}".format(john.pays(bill=bill, flatmate2=marry)))
 print("Marry pays: {:.2f}".format(marry.pays(bill=bill, flatmate2=john)))
+
+
+pdf = FPDF(orientation='P', unit='pt', format='A4')
+pdf.add_page()
+pdf.set_font(family='Times', size=24, style='B')
+pdf.cell(w=50, h=40, txt="Period", border=1,)
+
+pdf.output("bill.pdf")
