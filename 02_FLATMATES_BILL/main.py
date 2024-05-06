@@ -38,22 +38,26 @@ class PdfReport:
         self.filename =filename
 
     def generate(self, flatmate1, flatmate2, bill):
-        pass
+        pdf = FPDF(orientation='P', unit='pt', format='A4')
+        pdf.add_page()
 
+        # insert title
+        pdf.set_font(family='Times', size=24, style='B')
+        pdf.cell(w=0, h=80, txt="Flatmates Bill", border=1, align='C', ln=1)
 
-bill = Bill(amount=120, period="March 2023")
+        # insert period label and value
+        pdf.cell(w=100, h=40, txt="Period", border=1)
+        pdf.cell(w=180, h=40, txt=bill.period, border=1)
+
+        pdf.output(self.filename)
+
+the_bill = Bill(amount=120, period="December 2023")
 john = Flatmate(name="John", days_in_house=20)
 marry = Flatmate(name="Marry", days_in_house=25)
 
-print("John pays: {:.2f}".format(john.pays(bill=bill, flatmate2=marry)))
-print("Marry pays: {:.2f}".format(marry.pays(bill=bill, flatmate2=john)))
+print("John pays: {:.2f}".format(john.pays(bill=the_bill, flatmate2=marry)))
+print("Marry pays: {:.2f}".format(marry.pays(bill=the_bill, flatmate2=john)))
 
+pdf_report = PdfReport(filename="bill.pdf")
+pdf_report.generate(flatmate1=john, flatmate2=marry, bill=the_bill)
 
-pdf = FPDF(orientation='P', unit='pt', format='A4')
-pdf.add_page()
-pdf.set_font(family='Times', size=24, style='B')
-pdf.cell(w=0, h=80, txt="Flatmates Bill", border=1, align='C', ln=1)
-pdf.cell(w=100, h=40, txt="Period", border=1)
-pdf.cell(w=150, h=40, txt="March 2022", border=1)
-
-pdf.output("bill.pdf")
