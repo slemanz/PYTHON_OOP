@@ -47,11 +47,15 @@ class PdfReport:
 
         # insert period label and value
         pdf.cell(w=100, h=40, txt="Period", border=1)
-        pdf.cell(w=180, h=40, txt=bill.period, border=1)
+        pdf.cell(w=180, h=40, txt=bill.period, border=1, ln=1)
+
+        # insert name and due amount of the first flatmate
+        pdf.cell(w=100, h=40, txt=flatmate1.name, border=1)
+        pdf.cell(w=180, h=40, txt=str(flatmate1.pays(bill, flatmate2)), border=1, ln=1)
 
         pdf.output(self.filename)
 
-the_bill = Bill(amount=120, period="December 2023")
+the_bill = Bill(amount=120, period="November 2023")
 john = Flatmate(name="John", days_in_house=20)
 marry = Flatmate(name="Marry", days_in_house=25)
 
