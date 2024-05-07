@@ -1,4 +1,6 @@
+import os
 from fpdf import FPDF
+import webbrowser
 
 class Bill:
     '''
@@ -67,6 +69,12 @@ class PdfReport:
         pdf.cell(w=150, h=25, txt=flatmate2_pay, border=0, ln=1)
 
         pdf.output(self.filename)
+
+        # for windows
+        # webbrowser.open(self.filename)
+
+        # for linux
+        webbrowser.open('file://'+os.path.realpath(self.filename))
 
 
 
