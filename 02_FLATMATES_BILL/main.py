@@ -40,8 +40,11 @@ class PdfReport:
         self.filename =filename
 
     def generate(self, flatmate1, flatmate2, bill):
-        flatmate1_pay = str(round(flatmate1.pays(bill, flatmate2), 2))
-        flatmate2_pay = str(round(flatmate2.pays(bill, flatmate1), 2))
+        #flatmate1_pay = str(round(flatmate1.pays(bill, flatmate2), 2))
+        #flatmate2_pay = str(round(flatmate2.pays(bill, flatmate1), 2))
+
+        flatmate1_pay = "{:.2f}".format(flatmate1.pays(bill, flatmate2))
+        flatmate2_pay = "{:.2f}".format(flatmate2.pays(bill, flatmate1))
 
 
         pdf = FPDF(orientation='P', unit='pt', format='A4')
@@ -79,7 +82,11 @@ class PdfReport:
 
 
 
-the_bill = Bill(amount=120, period="September 2023")
+a = input("Hey user, enter the bill amount: ")
+a = float(a)
+print("This is a", a)
+
+the_bill = Bill(amount=a, period="September 2023")
 john = Flatmate(name="John", days_in_house=20)
 marry = Flatmate(name="Marry", days_in_house=25)
 
@@ -88,4 +95,3 @@ print("Marry pays: {:.2f}".format(marry.pays(bill=the_bill, flatmate2=john)))
 
 pdf_report = PdfReport(filename="bill.pdf")
 pdf_report.generate(flatmate1=john, flatmate2=marry, bill=the_bill)
-
