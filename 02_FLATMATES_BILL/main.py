@@ -82,16 +82,21 @@ class PdfReport:
 
 
 
-a = input("Hey user, enter the bill amount: ")
-a = float(a)
-print("This is a", a)
+amount = float(input("Hey user, enter the bill amount: "))
+period = input("What is the bill period? E.g. December 2023: ")
 
-the_bill = Bill(amount=a, period="September 2023")
-john = Flatmate(name="John", days_in_house=20)
-marry = Flatmate(name="Marry", days_in_house=25)
+name1 = input("What is your name? ")
+days_in_house1 = int(input(f"How many days did {name1} stay in the house during the bill period? "))
 
-print("John pays: {:.2f}".format(john.pays(bill=the_bill, flatmate2=marry)))
-print("Marry pays: {:.2f}".format(marry.pays(bill=the_bill, flatmate2=john)))
+name2 = input("What is the name of the other flatmate? ")
+days_in_house2 = int(input(f"How many days did {name2} stay in the house during the bill period? "))
+
+the_bill = Bill(amount, period)
+flatmate1 = Flatmate(name1, days_in_house1)
+flatmate2 = Flatmate(name2, days_in_house2)
+
+print("{} pays: {:.2f}".format(name1, flatmate1.pays(bill=the_bill, flatmate2=flatmate2)))
+print("{} pays: {:.2f}".format(name2, flatmate2.pays(bill=the_bill, flatmate2=flatmate1)))
 
 pdf_report = PdfReport(filename="bill.pdf")
-pdf_report.generate(flatmate1=john, flatmate2=marry, bill=the_bill)
+pdf_report.generate(flatmate1, flatmate2, bill=the_bill)
