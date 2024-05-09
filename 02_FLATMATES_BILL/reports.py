@@ -48,7 +48,7 @@ class PdfReport:
         pdf.output(file)
 
         # for windows
-        # webbrowser.open(self.filename)
+        # webbrowser.open(file)
 
         # for linux
         webbrowser.open('file://'+os.path.realpath(file))
