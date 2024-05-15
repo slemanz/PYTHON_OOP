@@ -25,7 +25,9 @@ class FirstScreen(Screen):
         print(image_link)
         imagepath = 'files/image.jpg'
 
-        print(req._content)
+        print(dir(req))
+        print(req.status_code)
+        print(req.content)
 
         """
         with open(imagepath, 'wb') as file:
