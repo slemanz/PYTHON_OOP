@@ -7,6 +7,13 @@ import requests
 
 
 
+# Use the obtained User-Agent string
+headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+}
+
+
+
 Builder.load_file('frontend.kv')
 
 
@@ -18,21 +25,21 @@ class FirstScreen(Screen):
 
         # get wikipedia page and the first image link
         page = wikipedia.page(query)
+
         image_link = page.images[0]
+        for x in range(0, len(page.images)):
+            if ('png' in image_link[x]) or ('jpg' in image_link[x]):
+                image_link = page.images[x]
+                break
 
         # Download the image
-        req = requests.get(image_link)
-        print(image_link)
+        req = requests.get(image_link, headers=headers)
         imagepath = 'files/image.jpg'
 
-        print(dir(req))
         print(req.status_code)
-        print(req.content)
 
-        """
         with open(imagepath, 'wb') as file:
-            file.write(req._content)
-        """
+            file.write(req.content)
 
 
         # set the image in the image widget

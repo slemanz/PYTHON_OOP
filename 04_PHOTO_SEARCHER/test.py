@@ -3,6 +3,7 @@ from wikipedia import wikipedia
 
 # Assuming other parts of your code remain unchanged
 query = "Python (programming language)"
+query = "Onepiece"
 page = wikipedia.page(query)
 image_link = page.images[1]
 
