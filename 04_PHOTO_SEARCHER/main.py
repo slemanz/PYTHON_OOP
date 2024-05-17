@@ -19,7 +19,7 @@ Builder.load_file('frontend.kv')
 
 class FirstScreen(Screen):
 
-    def search_image(self):
+    def get_image_link(self):
         # get user query from textinput
         query = self.manager.current_screen.ids.user_query.text
 
@@ -31,19 +31,27 @@ class FirstScreen(Screen):
             if ('png' in image_link[x]) or ('jpg' in image_link[x]):
                 image_link = page.images[x]
                 break
+            
+        return image_link
 
+
+    def download_image(self):
         # Download the image
-        req = requests.get(image_link, headers=headers)
+        req = requests.get(self.get_image_link(), headers=headers)
         imagepath = 'files/image.jpg'
 
         print(req.status_code)
 
         with open(imagepath, 'wb') as file:
             file.write(req.content)
+        
+        return imagepath
 
+
+    def set_image(self):
 
         # set the image in the image widget
-        self.manager.current_screen.ids.img.source = imagepath
+        self.manager.current_screen.ids.img.source = self.download_image()
 
 
 class RootWidget(ScreenManager):
