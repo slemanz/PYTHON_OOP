@@ -19,6 +19,7 @@
     GridLayout:
         cols:1
         Image:
+            id: img
         Button:
             text: 'Create Sharable Link'
         Label:
@@ -29,6 +30,7 @@
                 text: 'Copy Link'
             Button:
                 text: 'Open Link'
+                on_press: root.back()
 
 
 <RootWidget>:
@@ -38,4 +40,3 @@
     ImageScreen:
         id: image_screen
         name: 'image_screen'
-        
