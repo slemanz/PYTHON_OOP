@@ -8,6 +8,7 @@
             resolution: (640, 480)
             play: False
             size_hint_y: 0.8
+            opacity: 0
         Button:
             id: camera_button
             text: 'Start Camera'
@@ -18,7 +19,6 @@
             text: 'Capture'
             on_press: root.capture()
             size_hint_y: 0.1
-
 
 <ImageScreen>
     GridLayout:
@@ -46,6 +46,12 @@
 
 
 <RootWidget>:
+    canvas.before:
+        Color:
+            rgba: (0.3, 0.2, 0.1 , 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
     CameraScreen:
         id: camera_screen
         name: 'camera_screen'
